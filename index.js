@@ -28,6 +28,10 @@ async function run() {
 
     for (let pageNo = 1; pageNo <= pageLength; pageNo++) {
       console.log(`Current Faculty ${currFac} | Page ${pageNo}`);
+      if (pageNo === 1 && facNo > 1) {
+        await page.click(`#gvCourseList > tbody > tr:nth-child(1) > td > table > tbody > tr > td:nth-child(${1}) > a`);
+        await page.waitForSelector('#lblCMUMIS');
+      }
       // get total number of couse in page
       const courseLength = await page.evaluate((sel) => {
         return document.querySelector(sel).getElementsByTagName('tr').length;
